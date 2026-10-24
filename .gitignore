@@ -54,3 +54,12 @@ app.*.map.json
 
 # Android build output
 /android/build/
+
+# Kept locally, not part of the app repo
+/LINKEDIN_POSTS.md
+/LINKEDIN_PROMPT.md
+/VIDEO_PROMPT.md
+/linux/
+/macos/
+/windows/
+/web/
