@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "754301576159",
+    "firebase_url": "https://easyset-rashed-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "easyset-rashed",
+    "storage_bucket": "easyset-rashed.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:754301576159:android:d46ebedc975d8a7edf1a6a",
+        "android_client_info": {
+          "package_name": "com.example.gym_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "754301576159-kfsr3v12scpavuuloqu7tdlvkmc7g5hj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gym_app",
+            "certificate_hash": "b2d3dbf956af484f0af24d52fbd9e439fed69bb8"
+          }
+        },
+        {
+          "client_id": "754301576159-2g7rka7tv5stupl18p4oktm2sfga742h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCd7jSrKjsn4KfDQSbc6MvALq_pzgEQbuo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "754301576159-2g7rka7tv5stupl18p4oktm2sfga742h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
