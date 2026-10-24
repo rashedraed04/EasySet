@@ -44,7 +44,7 @@ class CloudService {
     try {
       await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
     } catch (e) {
-      debugPrint('Cloud backup disabled: $e');
+      _log('Cloud backup disabled: $e');
       return;
     }
     available = true;
@@ -146,7 +146,7 @@ class CloudService {
       syncState.value = SyncState.synced;
     } catch (e) {
       if (generation != _generation) return;
-      debugPrint('Sync failed: $e');
+      _log('Sync failed: $e');
       syncError.value = e.toString();
       syncState.value = SyncState.error;
     }
@@ -208,7 +208,7 @@ class CloudService {
   static void _listen(DocumentReference<Map<String, dynamic>> root, int generation) {
     void onError(Object e) {
       if (generation != _generation) return;
-      debugPrint('Sync listener error: $e');
+      _log('Sync listener error: $e');
       syncError.value = e.toString();
       syncState.value = SyncState.error;
     }
@@ -280,7 +280,13 @@ class CloudService {
     // Completes only once the server confirms, so it is deliberately not awaited
     // (Firestore keeps the write queued while offline).
     unawaited(op(_userDoc(uid)).catchError((Object e) {
-      debugPrint('Cloud write failed: $e');
+      _log('Cloud write failed: $e');
     }));
+  }
+
+  /// Debug builds only: Firebase errors can contain the user's id (in document
+  /// paths), and release builds should not write that to the device log.
+  static void _log(String message) {
+    if (kDebugMode) debugPrint(message);
   }
 }

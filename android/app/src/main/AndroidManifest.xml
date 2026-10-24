@@ -1,4 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Cloud backup (Firestore, Google Sign-In) and Google Fonts downloads. -->
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:label="Easy Set"
         android:name="${applicationName}"

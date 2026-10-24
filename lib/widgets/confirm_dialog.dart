@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import '../localization.dart';
 
-/// Yes/no dialog. Resolves to true only when the user confirms.
+/// Delete confirmation. Resolves to true only when the user confirms.
 Future<bool> showConfirmDialog(
   BuildContext context, {
   required String title,
   required String message,
-  String confirmLabel = 'Delete',
 }) async {
   final confirmed = await showDialog<bool>(
     context: context,
@@ -25,7 +24,7 @@ Future<bool> showConfirmDialog(
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: Text(translate(confirmLabel), style: const TextStyle(color: Colors.redAccent)),
+            child: Text(translate('Delete'), style: const TextStyle(color: Colors.redAccent)),
           ),
         ],
       );

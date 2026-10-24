@@ -6,7 +6,6 @@ class NumberStepper extends StatelessWidget {
   final int value;
   final int min;
   final int max;
-  final int step;
   final ValueChanged<int> onChanged;
 
   const NumberStepper({
@@ -16,7 +15,6 @@ class NumberStepper extends StatelessWidget {
     required this.onChanged,
     this.min = 1,
     this.max = 999,
-    this.step = 1,
   });
 
   @override
@@ -37,7 +35,7 @@ class NumberStepper extends StatelessWidget {
               IconButton(
                 visualDensity: VisualDensity.compact,
                 icon: const Icon(Icons.remove, size: 20),
-                onPressed: value > min ? () => onChanged((value - step).clamp(min, max)) : null,
+                onPressed: value > min ? () => onChanged((value - 1).clamp(min, max)) : null,
               ),
               Expanded(
                 child: Text(
@@ -53,7 +51,7 @@ class NumberStepper extends StatelessWidget {
               IconButton(
                 visualDensity: VisualDensity.compact,
                 icon: const Icon(Icons.add, size: 20),
-                onPressed: value < max ? () => onChanged((value + step).clamp(min, max)) : null,
+                onPressed: value < max ? () => onChanged((value + 1).clamp(min, max)) : null,
               ),
             ],
           ),

@@ -1,7 +1,8 @@
 name: gym_app
-description: "A new Flutter project."
+description: "Easy Set: offline-first gym tracker with Google account backup."
 publish_to: 'none'
-version: 0.1.0
+# name+build. Bump the build number (after the +) for every Google Play upload.
+version: 0.1.0+1
 
 environment:
   sdk: ^3.8.1
@@ -29,6 +30,8 @@ flutter:
   uses-material-design: true
 
 dependency_overrides:
+  # fl_chart 1.1 calls Matrix4.translateByDouble/scaleByDouble (vector_math 2.2+),
+  # but Flutter 3.32 pins vector_math 2.1.4. Drop this once Flutter ships 2.2+.
   vector_math: ^2.3.0
 
 flutter_launcher_icons:

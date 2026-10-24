@@ -1,28 +1,33 @@
 # Cloud backup setup (Google Sign-In + Firestore)
 
-The app already contains all the code. Until you connect a Firebase project it runs
-normally in local-only mode and Settings shows "Cloud backup is not set up in this build".
+The app is connected to the Firebase project `easyset-rashed` (Android). On a platform
+without a Firebase config it runs normally in local-only mode and Settings shows
+"Cloud backup is not set up in this build". Follow these steps only to set up a new
+Firebase project (see also README: "Switch to another Firebase project").
 
 ## 1. Create the Firebase project
 1. https://console.firebase.google.com → **Add project**.
 2. **Build → Authentication → Get started → Sign-in method → Google → Enable.**
 3. **Build → Firestore Database → Create database** (production mode, pick a region near your users).
 
-## 2. Firestore security rules
-Firestore → **Rules**, replace with:
+The app does not use Realtime Database or Storage: don't create them, or keep them locked
+(`database.rules.json` denies everything).
+
+## 2. Security rules
+The rules live in the repo and are deployed with the Firebase CLI
+(`npm install -g firebase-tools`, then `firebase login`):
 
 ```
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /users/{uid}/{document=**} {
-      allow read, write: if request.auth != null && request.auth.uid == uid;
-    }
-  }
-}
+firebase deploy --only firestore:rules,database
 ```
 
-Each user can only read and write their own `users/{uid}` data.
+- `firestore.rules`: each signed-in user can only read and write their own
+  `users/{uid}/exercises`, `users/{uid}/templates` and `users/{uid}/meta/options`, and
+  writes must have the field types the app reads. Everything else is denied.
+- `database.rules.json`: denies all access to Realtime Database (unused).
+
+If you add a new kind of document to the app, add a matching `match` block to
+`firestore.rules` and deploy it **before** releasing that app version, or its sync fails.
 
 ## 3. Connect the app
 ```

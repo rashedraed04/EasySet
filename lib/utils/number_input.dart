@@ -26,13 +26,6 @@ double? parseNumber(String input) {
   return value;
 }
 
-/// Returns null when [input] is not a whole number.
-int? parseWholeNumber(String input) {
-  final value = parseNumber(input);
-  if (value == null || value != value.truncateToDouble()) return null;
-  return value.toInt();
-}
-
 /// 80 -> "80", 82.5 -> "82.5"
 String formatNumber(double value) {
   return value.toStringAsFixed(value.truncateToDouble() == value ? 0 : 1);

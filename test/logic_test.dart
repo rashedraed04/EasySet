@@ -31,8 +31,6 @@ void main() {
       expect(parseNumber('abc'), isNull);
       expect(parseNumber('-5'), isNull);
       expect(parseNumber('1.2.3'), isNull);
-      expect(parseWholeNumber('8.5'), isNull);
-      expect(parseWholeNumber('٨'), 8);
     });
 
     test('formats whole numbers without decimals', () {

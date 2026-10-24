@@ -104,6 +104,9 @@ const Map<String, String> _arabicMap = {
   'Total volume': 'إجمالي الحجم',
   'Done': 'تم',
 
+  // Errors
+  'Something went wrong. Please restart the app.': 'حدث خطأ ما. يرجى إعادة تشغيل التطبيق.',
+
   // Default exercises
   'Bench Press': 'ضغط الصدر',
   'Squat': 'القرفصاء',

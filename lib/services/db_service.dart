@@ -135,9 +135,6 @@ class DBService {
   // ------------------------------------------- used by CloudService only
   // These write straight to the local boxes and never push back to the cloud.
 
-  static Set<String> get localExerciseIds => _log.keys.map((k) => k.toString()).toSet();
-  static Set<String> get localTemplateIds => _templates.keys.map((k) => k.toString()).toSet();
-
   static Map<String, Map<String, dynamic>> localExerciseMaps() => {
         for (final e in _log.values)
           (e as Map)['id'] as String: Map<String, dynamic>.from(e),

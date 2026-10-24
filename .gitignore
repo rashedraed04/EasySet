@@ -4,6 +4,7 @@
 *.pyc
 *.swp
 .DS_Store
+Thumbs.db
 .atom/
 .build/
 .buildlog/
@@ -18,10 +19,16 @@ migrate_working_dir/
 *.iws
 .idea/
 
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
+# VS Code settings are per developer
+.vscode/
+
+# Secrets: release signing keys and local env files (anywhere in the repo).
+# android/key.properties.example shows the expected format.
+*.jks
+*.keystore
+key.properties
+.env
+.env.*
 
 # Flutter/Dart/Pub related
 **/doc/api/
@@ -32,6 +39,15 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+coverage/
+
+# Release packages copied out of build/
+*.apk
+*.aab
+*.ipa
+
+# Firebase CLI cache
+.firebase/
 
 # Symbolication related
 app.*.symbols
@@ -59,6 +75,7 @@ app.*.map.json
 /LINKEDIN_POSTS.md
 /LINKEDIN_PROMPT.md
 /VIDEO_PROMPT.md
+/RELEASE_AUDIT_PROMPT.md
 /linux/
 /macos/
 /windows/

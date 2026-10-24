@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -6,9 +7,11 @@ import 'services/cloud_service.dart';
 import 'services/db_service.dart';
 import 'services/settings_service.dart';
 import 'screens/home_screen.dart';
+import 'widgets/build_error_message.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  if (kReleaseMode) ErrorWidget.builder = (_) => const BuildErrorMessage();
   await Hive.initFlutter();
   await SettingsService.init();
   await DBService.init();

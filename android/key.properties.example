@@ -1,0 +1,20 @@
+# Release signing for Google Play. Copy this file to android/key.properties
+# and fill in your own values. key.properties and *.jks are git-ignored: never
+# commit them, and keep a backup of both somewhere safe (losing the upload key
+# means asking Google Play support to reset it).
+#
+# Create the upload keystore once (keytool ships with Android Studio, in
+# "C:\Program Files\Android\Android Studio\jbr\bin"):
+#   keytool -genkey -v -keystore android/app/upload-keystore.jks -keyalg RSA -keysize 2048 -validity 10000 -alias upload
+#
+# Without android/key.properties, release builds are signed with the debug key
+# (fine for `flutter run --release`, rejected by Google Play).
+
+# Password you chose for the keystore file.
+storePassword=CHANGE_ME
+# Password for the key inside it (keytool uses the store password if you just press Enter).
+keyPassword=CHANGE_ME
+# The -alias you passed to keytool.
+keyAlias=upload
+# Keystore path, relative to android/app/.
+storeFile=upload-keystore.jks

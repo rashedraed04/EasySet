@@ -1,9 +1,40 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Each signed-in user can only read and write their own data.
-    match /users/{uid}/{document=**} {
-      allow read, write: if request.auth != null && request.auth.uid == uid;
+    // Each signed-in user can only read and write their own data, and only the
+    // three kinds of documents the app stores. Everything else is denied.
+    function isOwner(uid) {
+      return request.auth != null && request.auth.uid == uid;
+    }
+
+    // These mirror what Exercise.fromMap / WorkoutTemplate.fromMap require, so
+    // a malformed document can never reach (and break) the app on the user's
+    // other devices. Extra fields are allowed so newer app versions can add some.
+    function isExercise(d) {
+      return d.name is string && d.weight is number && d.date is number
+          && (!('sets' in d) || d.sets is number)
+          && (!('reps' in d) || d.reps is number);
+    }
+
+    function isTemplate(d) {
+      return d.name is string
+          && (!('items' in d) || d.items is list)
+          && (!('createdAt' in d) || d.createdAt is number);
+    }
+
+    match /users/{uid}/exercises/{id} {
+      allow read, delete: if isOwner(uid);
+      allow create, update: if isOwner(uid) && isExercise(request.resource.data);
+    }
+
+    match /users/{uid}/templates/{id} {
+      allow read, delete: if isOwner(uid);
+      allow create, update: if isOwner(uid) && isTemplate(request.resource.data);
+    }
+
+    match /users/{uid}/meta/options {
+      allow read: if isOwner(uid);
+      allow create, update: if isOwner(uid) && request.resource.data.names is list;
     }
   }
 }
